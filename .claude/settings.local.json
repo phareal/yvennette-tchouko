@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:yvennette-tchouko-portfolio.netlify.app)",
+      "Bash(rtk ls *)",
+      "Bash(open *)",
+      "Bash(rtk curl *)",
+      "Bash(rtk wc *)",
+      "Bash(rtk read *)",
+      "Bash(rtk grep *)",
+      "Bash(awk *)",
+      "Bash(python3 *)",
+      "Bash(rtk du *)"
+    ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true
+  }
+}
