@@ -654,6 +654,48 @@
   }
   .dossier-note li b { color: var(--gold); }
   .dossier-note li span:last-child { color: rgba(201,169,110,0.5); }
+  .dossier-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .dossier-cta--view {
+    background: transparent; border: 1px solid rgba(201,169,110,0.5);
+    color: var(--gold); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    padding: 0.9rem 1.75rem; border-radius: 999px;
+    font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 500; align-self: flex-start;
+    transition: opacity 0.3s, transform 0.3s, background 0.3s;
+  }
+  .dossier-cta--view:hover { background: rgba(201,169,110,0.1); transform: translateY(-2px); }
+  .dossier-cta--view svg { width: 14px; height: 14px; }
+
+  /* CV VIEWER MODAL */
+  .cv-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 9000;
+    background: rgba(0,0,0,0.88); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  .cv-modal-overlay.open { display: flex; }
+  .cv-modal {
+    width: min(92vw, 860px); height: min(92vh, 1100px);
+    background: var(--dark); border: 1px solid rgba(201,169,110,0.3);
+    display: flex; flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+  .cv-modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1.5rem;
+    border-bottom: 1px solid rgba(201,169,110,0.15); flex-shrink: 0;
+  }
+  .cv-modal-title {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .cv-modal-close {
+    background: none; border: none; cursor: pointer;
+    color: var(--muted); line-height: 1; padding: 0.25rem 0.4rem;
+    font-size: 1rem; transition: color 0.2s;
+  }
+  .cv-modal-close:hover { color: var(--text); }
+  .cv-modal iframe { flex: 1; width: 100%; border: none; display: block; }
 
   /* RESPONSIVE */
   @media (max-width: 1100px) {
@@ -1052,52 +1094,6 @@
   </div>
   <div class="projects-grid">
 
-    <!-- PROJECT 01 -->
-    <div class="project-card">
-      <div class="project-visual">
-        <div class="visual-tag"><span>R-01 / Carte</span><span>Distribution Repas</span></div>
-        <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <pattern id="pg1" width="20" height="20" patternUnits="userSpaceOnUse">
-              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(201,169,110,0.12)" stroke-width="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="400" height="220" fill="url(#pg1)"/>
-          <g fill="none" stroke="rgba(201,169,110,0.18)" stroke-width="0.8">
-            <path d="M-20 180 Q 100 150 200 165 T 420 150"/>
-            <path d="M-20 140 Q 100 105 200 125 T 420 105"/>
-          </g>
-          <path d="M60 170 Q 100 105 180 112 Q 260 120 340 55" fill="none" stroke="#C9A96E" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="60" cy="170" r="8" fill="rgba(10,10,15,0.9)" stroke="#C9A96E" stroke-width="1.5"/>
-          <circle cx="60" cy="170" r="3" fill="#C9A96E"/>
-          <circle cx="180" cy="112" r="8" fill="rgba(10,10,15,0.9)" stroke="#C9A96E" stroke-width="1.5"/>
-          <circle cx="340" cy="55" r="11" fill="#C9A96E" opacity="0.9"/>
-          <circle cx="340" cy="55" r="5" fill="rgba(10,10,15,0.9)"/>
-          <g font-family="'DM Sans',sans-serif" font-size="8" fill="rgba(201,169,110,0.65)">
-            <text x="74" y="174">CUISINE</text>
-            <text x="194" y="116">TRI</text>
-            <text x="322" y="44" text-anchor="middle">DISTRIB.</text>
-          </g>
-        </svg>
-      </div>
-      <div class="project-body">
-        <div class="project-num">01</div>
-        <div class="project-tags">
-          <span class="project-tag solid">Fondation</span>
-          <span class="project-tag warm">Association</span>
-          <span class="project-tag">Distribution</span>
-        </div>
-        <h3 class="project-title">Fondation d'une association — <em>distribution de repas</em></h3>
-        <p class="project-desc">Initiation et structuration juridique d'une association dédiée à la distribution de repas pour personnes vulnérables. Mise en place des partenariats logistiques et premier cycle de distribution.</p>
-        <dl class="project-meta">
-          <div><dt>Rôle</dt><dd>Fondatrice &amp; coordinatrice</dd></div>
-          <div><dt>Période</dt><dd>2024</dd></div>
-          <div><dt>Bénéficiaires</dt><dd>Familles vulnérables</dd></div>
-          <div><dt>Statut</dt><dd><span class="project-status">En activité</span></dd></div>
-        </dl>
-      </div>
-    </div>
-
     <!-- PROJECT 02 -->
     <div class="project-card">
       <div class="project-visual">
@@ -1235,10 +1231,10 @@
         <div><dt>Édition</dt><dd>Mai 2025</dd></div>
         <div><dt>Volume</dt><dd>~ 280 Ko</dd></div>
       </dl>
-      <a href="CV_TCHOUKO_Yvennette.pdf" class="dossier-cta" download>
-        Télécharger le dossier
-        <svg viewBox="0 0 14 14" fill="none"><path d="M7 1v10M2 7l5 5 5-5M1 13h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <button class="dossier-cta dossier-cta--view" onclick="openCV()">
+        Voir le CV
+        <svg viewBox="0 0 14 14" fill="none"><path d="M1 7s2.5-4.5 6-4.5S13 7 13 7s-2.5 4.5-6 4.5S1 7 1 7Z" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="7" r="1.8" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
     </div>
     <aside class="dossier-note">
       <h3>Ce que contient <em>le dossier</em></h3>
@@ -1253,6 +1249,17 @@
     </aside>
   </div>
 </section>
+
+<!-- CV VIEWER MODAL -->
+<div id="cvModal" class="cv-modal-overlay" onclick="if(event.target===this)closeCV()">
+  <div class="cv-modal">
+    <div class="cv-modal-header">
+      <span class="cv-modal-title">Curriculum Vitæ · Tchouko Yvennette</span>
+      <button class="cv-modal-close" onclick="closeCV()" aria-label="Fermer">✕</button>
+    </div>
+    <iframe src="CV_Yvennette_TCHOUKO_(1)%20inter2.pdf" title="CV Yvennette Tchouko"></iframe>
+  </div>
+</div>
 
 
 <div class="section-divider"></div>
@@ -1311,6 +1318,15 @@ function handleSubmit(e) {
   e.preventDefault();
   alert('Merci pour votre message ! Yvennette vous contactera très bientôt.');
 }
+function openCV() {
+  document.getElementById('cvModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCV() {
+  document.getElementById('cvModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeCV(); });
 </script>
 </body>
 </html>
